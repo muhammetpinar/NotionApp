@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Docker İmajını Oluştur
-                    sh 'docker build -t my-app-image .'
+                    sh 'docker build -t NotionAppImage .'
                 }
             }
         }
@@ -15,11 +15,11 @@ pipeline {
             steps {
                 script {
                     // Mevcut konteyner varsa durdur ve sil
-                    sh 'docker stop my-app-container || true'
-                    sh 'docker rm my-app-container || true'
+                    sh 'docker stop NotionApp_container || true'
+                    sh 'docker rm NotionApp_container || true'
 
                     // Docker Konteynerini Başlat
-                    sh 'docker run -d --name my-app-container -p 6500:6500 my-app-image'
+                    sh 'docker run -d --name NotionApp_container -p 6500:6500 NotionAppImage'
                 }
             }
         }
