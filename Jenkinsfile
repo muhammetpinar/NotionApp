@@ -2,11 +2,11 @@ pipeline {
     agent any
 
     stages {
-        stage('Build Docker Image') {
+        stage('Build') {
             steps {
                 script {
-                    // Docker image'ı oluştur
-                    sh 'docker build -t my-flask-app .'
+                    // Docker Compose Build
+                    sh 'docker-compose -f docker-compose.yml build --pull --no-cache'
                 }
             }
         }
@@ -14,7 +14,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Docker Compose ile uygulamayı başlat
+                    // Yeni versiyonu başlat ve eski versiyonu durdur
                     sh 'docker-compose -f docker-compose.yml up -d --remove-orphans'
                 }
             }
@@ -24,7 +24,7 @@ pipeline {
     post {
         always {
             script {
-                // Temizlik işlemleri (örneğin, kullanılmayan container'ları temizlemek)
+                // Temizlik işlemleri 
                 sh 'docker system prune -f'
             }
         }
