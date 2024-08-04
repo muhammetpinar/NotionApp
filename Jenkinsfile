@@ -19,7 +19,7 @@ pipeline {
                     sh 'docker rm my-app-container || true'
 
                     // Docker Konteynerini Başlat
-                    sh 'docker run -d --name my-app-container -p 8000:8000 my-app-image'
+                    sh 'docker run -d --name my-app-container -p 6500:6500 my-app-image'
                 }
             }
         }
