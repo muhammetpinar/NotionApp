@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Docker image'ı oluştur
-                    sh 'docker build -t NotionApp .'
+                    sh 'docker build -t my-flask-app .'
                 }
             }
         }
@@ -24,7 +24,7 @@ pipeline {
     post {
         always {
             script {
-                // Temizlik işlemleri
+                // Temizlik işlemleri (örneğin, kullanılmayan container'ları temizlemek)
                 sh 'docker system prune -f'
             }
         }
