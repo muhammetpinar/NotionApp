@@ -72,6 +72,7 @@ class FlaskApp:
     def run(self):
         self.app.run(debug=True)
 
+app = FlaskApp().app
+
 if __name__ == "__main__":
-    flask_app = FlaskApp()
-    flask_app.run()
+    FlaskApp().run()
