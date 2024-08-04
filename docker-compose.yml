@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   web:
-    image: NotionApp
+    image: NotionApp 
     build:
       context: .
       dockerfile: Dockerfile
