@@ -5,8 +5,8 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // Docker Compose Build
-                    sh 'docker-compose -f docker-compose.yml build --pull --no-cache'
+                    // Docker İmajını Oluştur
+                    sh 'docker build -t my-app-image .'
                 }
             }
         }
@@ -14,8 +14,12 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Yeni versiyonu başlat ve eski versiyonu durdur
-                    sh 'docker-compose -f docker-compose.yml up -d --remove-orphans'
+                    // Mevcut konteyner varsa durdur ve sil
+                    sh 'docker stop my-app-container || true'
+                    sh 'docker rm my-app-container || true'
+
+                    // Docker Konteynerini Başlat
+                    sh 'docker run -d --name my-app-container -p 8000:8000 my-app-image'
                 }
             }
         }
@@ -24,7 +28,7 @@ pipeline {
     post {
         always {
             script {
-                // Temizlik işlemleri 
+                // Temizlik işlemleri (örneğin, kullanılmayan Docker imajlarını temizlemek)
                 sh 'docker system prune -f'
             }
         }
