@@ -24,13 +24,4 @@ pipeline {
             }
         }
     }
-
-    post {
-        always {
-            script {
-                // Temizlik işlemleri (örneğin, kullanılmayan Docker imajlarını temizlemek)
-                sh 'docker system prune -f'
-            }
-        }
-    }
 }
