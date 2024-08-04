@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Docker image'ı oluştur
-                    sh 'docker build -t my-flask-app .'
+                    sh 'docker build -t NotionApp .'
                 }
             }
         }
